@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+
+# Build
+DerivedData/
+build/
+
+# Swift Package Manager
+.build/
+
+# Secrets
+Secrets.swift
+Config.swift
