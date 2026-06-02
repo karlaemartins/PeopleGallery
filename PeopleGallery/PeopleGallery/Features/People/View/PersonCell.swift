@@ -9,6 +9,8 @@ import UIKit
 
 final class PersonCell: UICollectionViewCell {
     
+    static let reuseIdentifier = "PersonCell"
+    
     private let imageView = UIImageView()
     private let nameLabel = UILabel()
 
@@ -62,6 +64,11 @@ final class PersonCell: UICollectionViewCell {
                 nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
                 
                 nameLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -10)])
+    }
+    
+    func configure(name: String, image: UIImage?) {
+        nameLabel.text = name
+        imageView.image = image
     }
 
 }

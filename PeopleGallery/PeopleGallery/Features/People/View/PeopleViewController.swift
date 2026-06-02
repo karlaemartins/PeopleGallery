@@ -10,6 +10,12 @@ import UIKit
 final class PeopleViewController: UIViewController {
     
     private var collectionView: UICollectionView!
+    
+    private var people: [Person] = [
+        Person(id: UUID(), name: "Karla", imageName: ""),
+        Person(id: UUID(), name: "Maria", imageName: ""),
+        Person(id: UUID(), name: "João", imageName: "")
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +28,7 @@ final class PeopleViewController: UIViewController {
     }
     
     private func configureCollectionView() {
-        
+            
         let layout = UICollectionViewFlowLayout()
 
         layout.itemSize = CGSize(width: 140, height: 180)
@@ -30,7 +36,13 @@ final class PeopleViewController: UIViewController {
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
+        collectionView.register(PersonCell.self, forCellWithReuseIdentifier: PersonCell.reuseIdentifier)
+        
+        collectionView.dataSource = self
+
+        
         view.addSubview(collectionView)
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -43,7 +55,27 @@ final class PeopleViewController: UIViewController {
             collectionView.bottomAnchor.constraint(
                 equalTo: view.bottomAnchor)])
         
+    }
+}
+
+extension PeopleViewController: UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
+        return people.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonCell.reuseIdentifier, for: indexPath) as? PersonCell
+        else {
+            fatalError("Unable to dequeue PersonCell.")
+        }
         
+        let person = people[indexPath.item]
+
+        cell.configure(name: person.name, image: nil)
+
+        return cell
     }
 }
