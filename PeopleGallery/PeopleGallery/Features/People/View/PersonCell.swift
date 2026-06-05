@@ -36,6 +36,13 @@ final class PersonCell: UICollectionViewCell {
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageView.layer.borderColor = UIColor(white: 0, alpha: 0.3).cgColor
+        imageView.layer.borderWidth = 2
+        imageView.layer.cornerRadius = 3
+
+        contentView.layer.cornerRadius = 7
+        contentView.backgroundColor = .secondarySystemBackground
 
     }
 
